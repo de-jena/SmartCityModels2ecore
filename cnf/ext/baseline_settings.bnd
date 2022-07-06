@@ -1,0 +1,28 @@
+# Enable semantic versioning for all bundles
+-baselinerepo: Baseline
+#-baseline: *
+
+# Ignore files for baselining
+-diffignore: *.xml,\
+	*/pom.properties,\
+	 Git-SHA,\
+	 Bundle-Vendor,\
+	 Bundle-License,\
+	 Bundle-DocURL,\
+	 Bundle-SCM,\
+	 Bundle-Developers,\
+	 Bundle-Copyright,\
+	 Bundle-ContactAddress,\
+	 META-INF/maven/*,\
+	 OSGI-OPT/*
+	 
+-plugin.baseline: \
+	aQute.bnd.repository.maven.provider.MavenBndRepository;\
+		snapshotUrl=https://devel.data-in-motion.biz/nexus/repository/dim-snapshot/;\
+		releaseUrl=https://devel.data-in-motion.biz/nexus/repository/dim-release/;\
+		name='DIM_Release',\
+	aQute.bnd.repository.osgi.OSGiRepository;\
+		locations=https://devel.data-in-motion.biz/public/repository/gecko/release/playertour/index.xml;\
+		max.stale=-1;\
+		name=Baseline;\
+		cache=${build}/cache/Baseline

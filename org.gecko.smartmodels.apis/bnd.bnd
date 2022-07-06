@@ -1,0 +1,10 @@
+-include: ${workspace}/cnf/include/jdt.bnd
+
+-library: enable-emf
+
+-buildpath:  \
+	osgi.annotation;version=7.0,\
+	osgi.core;version=7.0,\
+	osgi.cmpn;version=7.0
+	
+Bundle-Version: 1.0.0-SNAPSHOT

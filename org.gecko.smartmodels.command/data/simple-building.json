@@ -1,0 +1,25 @@
+{
+  "id": "building-a85e3da145c1",
+  "type": "Building",
+  "dateCreated": "2016-08-08T10:18:16Z",
+  "dateModified": "2016-08-08T10:18:16Z",
+  "source": "http://www.example.com",
+  "dataProvider": "OperatorA",
+  "category": [
+    "office"
+  ],
+  "floorsAboveGround": 7,
+  "floorsBelowGround": 0,
+  "description": "Office block",
+  "openingHours": [
+    "Mo-Fr 10:00-19:00",
+    "Sa 10:00-22:00",
+    "Su 10:00-21:00"
+  ],
+  "address": {
+    "addressLocality": "London",
+    "postalCode": "EC4N 8AF",
+    "streetAddress": "25 Walbrook"
+  }
+}
+

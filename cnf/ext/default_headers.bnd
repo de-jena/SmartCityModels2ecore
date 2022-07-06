@@ -1,0 +1,37 @@
+project-version: 1.0.0
+
+#Set Git revision information in the manifests of built bundles
+#Git-Descriptor:           ${system-allow-fail;git describe --dirty --always}
+Git-SHA:                  ${system-allow-fail;git rev-list -1 HEAD}
+
+Bundle-License: Eclipse Public License 1.0
+Bundle-Copyright:Data In Motion Consuling GmbH - All rights reserved
+Bundle-Vendor: Data In Motion Consuling GmbH
+Bundle-Version: ${project-version}
+Bundle-ContactAddress: info@data-in-motion.biz
+Bundle-DocURL: https://gitlab.com/datainmotion/smartmodels/models
+Bundle-SCM: url=https://gitlab.com/datainmotion/smartmodels/models, \
+	connection=scm:git:https://gitlab.com/datainmotion/smartmodels/models.git, \
+    developerConnection=scm:git:https://gitlab.com/datainmotion/smartmodels/models.git
+Bundle-Developers: \
+    jalbert; \
+        email="j.albert@data-in-motion.biz"; \
+        name="Juergen Albert"; \
+        organization="Data In Motion"; \
+        organizationUrl="https://www.datainmotion.de"; \
+        roles="architect,developer", \
+    isalvadori; \
+        name="Ilenia Salvadori"; \
+        email="i.salvadori@data-in-motion.biz"; \
+        url="https://www.datainmotion.de"; \
+        organization="Data In Motion"; \
+        organizationUrl="https://www.datainmotion.de"; \
+        roles="developer,architect"
+
+-removeheaders: Bnd-LastModified, Tool, Created-By
+        
+-includeresource.license: \
+	META-INF/LICENSE=${workspace}/cnf/license/LICENSE
+
+#-includeresource.icon: \
+#	icons=${workspace}/cnf/icons

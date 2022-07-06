@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.gecko.smartmodels.building.model/src" modelPluginID="org.gecko.smartmodels.building.model"
+    modelName="building" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" suppressGenModelAnnotations="false"
+    copyrightFields="false" operationReflection="true" importOrganizing="true" oSGiCompatible="true">
+  <foreignModel>building.ecore</foreignModel>
+  <genPackages prefix="Building" basePackage="org.gecko.smartmodels.building.model"
+      resource="XMI" disposableProviderFactory="true" literalsInterface="false" ecorePackage="building.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="building.ecore#//CategoryValue">
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/apartments"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/bakehouse"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/barn"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/bridge"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/bungalow"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/bunker"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/cathedral"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/cabin"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/carport"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/chapel"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/church"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/civic"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/commercial"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/conservatory"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/construction"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/cowshed"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/detached"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/digester"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/dormitory"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/farm"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/farm_auxiliary"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/garage"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/garages"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/garbage_shed"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/grandstand"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/greenhouse"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/hangar"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/hospital"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/hotel"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/house"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/houseboat"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/hut"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/industrial"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/kindergarten"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/kiosk"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/mosque"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/office"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/parking"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/pavilion"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/public"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/residential"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/retail"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/riding_hall"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/roof"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/ruins"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/school"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/service"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/shed"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/shrine"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/stable"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/stadium"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/static_caravan"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/sty"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/synagogue"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/temple"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/terrace"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/train_station"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/transformer_tower"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/transportation"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/university"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/warehouse"/>
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//CategoryValue/water_tower"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="building.ecore#//TypeValue">
+      <genEnumLiterals ecoreEnumLiteral="building.ecore#//TypeValue/Building"/>
+    </genEnums>
+    <genClasses ecoreClass="building.ecore#//Building">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference building.ecore#//Building/address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/alternateName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/areaServed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/collapseRisk"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/dataProvider"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/dateCreated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/dateModified"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/floorsAboveGround"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/floorsBelowGround"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/occupier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/openingHours"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/owner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/peopleCapacity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/peopleOccupancy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/refMap"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/type"/>
+    </genClasses>
+    <genClasses ecoreClass="building.ecore#//Address">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Address/addressCountry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Address/addressLocality"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Address/addressRegion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Address/postOfficeBoxNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Address/postalCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Address/streetAddress"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,2 @@
+-include: \
+	https://gitlab.com/gecko.io/geckoBndTemplates/-/raw/atomic/cnf/common/felix.bnd

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<repository xmlns="http://www.osgi.org/xmlns/repository/v1.0.0" name="Local" increment="1656056860342">
+  <resource>
+    <capability namespace="osgi.identity">
+      <attribute name="osgi.identity" value="org.apiguardian"/>
+      <attribute name="type" value="osgi.bundle"/>
+      <attribute name="version" value="1.1.0.v20190826-0900" type="Version"/>
+    </capability>
+    <capability namespace="osgi.wiring.package">
+      <attribute name="bundle-symbolic-name" value="org.apiguardian"/>
+      <attribute name="bundle-version" value="1.1.0.v20190826-0900" type="Version"/>
+      <attribute name="version" value="1.1.0" type="Version"/>
+      <attribute name="osgi.wiring.package" value="org.apiguardian.api"/>
+      <attribute name="bnd.hashes" value="-1808614382,65018" type="List&lt;Long&gt;"/>
+    </capability>
+    <capability namespace="osgi.wiring.bundle">
+      <attribute name="bundle-version" value="1.1.0.v20190826-0900" type="Version"/>
+      <attribute name="osgi.wiring.bundle" value="org.apiguardian"/>
+    </capability>
+    <capability namespace="osgi.wiring.host">
+      <attribute name="bundle-version" value="1.1.0.v20190826-0900" type="Version"/>
+      <attribute name="osgi.wiring.host" value="org.apiguardian"/>
+    </capability>
+    <capability namespace="osgi.content">
+      <attribute name="size" value="16411" type="Long"/>
+      <attribute name="url" value="org.apiguardian/org.apiguardian-1.1.0.jar"/>
+      <attribute name="mime" value="application/vnd.osgi.bundle"/>
+      <attribute name="osgi.content" value="50E007F62069F49A8E4AF5478A6229049891B761918AA5E28AE281264CF78182"/>
+    </capability>
+    <requirement namespace="osgi.ee">
+      <directive name="filter" value="(&amp;(osgi.ee=JavaSE)(version=1.6))"/>
+    </requirement>
+  </resource>
+</repository>

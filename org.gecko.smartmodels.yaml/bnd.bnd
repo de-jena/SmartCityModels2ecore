@@ -1,0 +1,11 @@
+-include: ${workspace}/cnf/include/jdt.bnd
+
+-buildpath: \
+	osgi.annotation;version='7.0',\
+	osgi.core;version='7.0',\
+	osgi.cmpn;version='7.0',\
+	org.gecko.smartmodels.apis;version=latest,\
+	org.yaml.snakeyaml;version='1.30'
+
+Bundle-Version: 1.0.0-SNAPSHOT
+Private-Package: org.gecko.smartmodels.yaml
