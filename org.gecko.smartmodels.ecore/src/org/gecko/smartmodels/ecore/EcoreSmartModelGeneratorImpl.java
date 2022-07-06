@@ -11,11 +11,9 @@
  */
 package org.gecko.smartmodels.ecore;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +26,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.emfjson.jackson.databind.EMFContext;
 import org.gecko.smartmodels.apis.ecore.EcoreSmartModelGenerator;
 import org.gecko.smartmodels.apis.yaml.YamlReader;
-import org.gecko.smartmodels.building.model.building.Building;
-import org.gecko.smartmodels.building.model.building.BuildingFactory;
 import org.gecko.smartmodels.ecore.helper.ECoreGeneratorHelper;
 import org.osgi.service.component.ComponentServiceObjects;
 import org.osgi.service.component.annotations.Component;
@@ -44,9 +39,6 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 
 	@Reference
 	private ComponentServiceObjects<ResourceSet> resourceSetFactory;
-	
-	@Reference
-	BuildingFactory buildingFactory;
 
 	@Reference
 	private YamlReader yamlReader;
@@ -67,7 +59,7 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 		if(mainObjectName == null) {
 			throw new IllegalArgumentException("No main object found in yaml file! Cannot continue...");
 		}
-		String ecoreModelName = mainObjectName.toLowerCase();
+		String ecoreModelName = mainObjectName.substring(0,1).toLowerCase() + mainObjectName.substring(1);
 		final EPackage mainEcorePackage = ECoreGeneratorHelper.createPackage(ecoreModelName, ecoreModelName, ECORE_URL_PREFIX+ecoreModelName+ECORE_URL_VERSION);
 		final EClass mainEcoreClass = ECoreGeneratorHelper.createEClass(mainObjectName);
 		mainEcorePackage.getEClassifiers().add(mainEcoreClass);
@@ -88,23 +80,23 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 			Map<String, Object> propertiesMap = (Map<String, Object>) yamlContent.get(YamlReader.YAML_PROPERTIES_KEY);
 			propertiesMap.forEach((k, v) -> {
 				Map<String, Object> valueMap = (Map<String, Object>) v;
+				int lowerBound = requiredProperties.contains(k) ? 1 : 0;
+				int upperBound = 1;
 				if(valueMap.containsKey(YamlReader.YAML_TYPE_KEY)) {
 					String propertyType = (String) valueMap.get(YamlReader.YAML_TYPE_KEY);
-					int lowerBound = requiredProperties.contains(k) ? 1 : 0;
-					int upperBound = 1;
 					doConvertProperty(k, propertyType, valueMap, lowerBound, upperBound, eClass, mainEPackage);						
 				}
 				else if(valueMap.containsKey(YamlReader.YAML_ANYOF_KEY)) {
 //					System.out.println("AnyOf: " + k);
 //					System.out.println("AnyOf: " + valueMap.get(YamlReader.YAML_ANYOF_KEY));
-					int lowerBound = requiredProperties.contains(k) ? 1 : 0;
-					int upperBound = 1;
 					extractAnyOf(k, (List<Map<String, Object>>) valueMap.get(YamlReader.YAML_ANYOF_KEY), lowerBound, upperBound, eClass, mainEPackage, extractElementDescription(valueMap));
 				}
 				else if(valueMap.containsKey(YamlReader.YAML_ONEOF_KEY)) {
 //					TODO add support for oneOf attributes
-//					System.out.println("OneOf: " + k);
+					System.out.println("OneOf: " + k);
 //					System.out.println("AnyOf: " + valueMap.get(YamlReader.YAML_ONEOF_KEY));
+					extractAnyOf(k, (List<Map<String, Object>>) valueMap.get(YamlReader.YAML_ONEOF_KEY), lowerBound, upperBound, eClass, mainEPackage, extractElementDescription(valueMap));
+
 				}
 			});
 		}
@@ -230,44 +222,4 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 			throw new RuntimeException("Error saving ecore model " + e);
 		}		
 	}
-
-	/* 
-	 * (non-Javadoc)
-	 * @see org.gecko.smartmodels.apis.ecore.EcoreSmartModelGenerator#createConcreteEObject(java.lang.String)
-	 */
-	@Override
-	public void createConcreteEObject(String pathToJsonInputFile) {
-		
-		File f = new File(pathToJsonInputFile);
-		if(f.exists()) {
-			System.out.println("File Found");
-		} else {
-			System.out.println("File not found");
-		}
-		ResourceSet resourceSet = resourceSetFactory.getService();
-		Resource inRes = resourceSet.createResource(URI.createFileURI(pathToJsonInputFile));
-		try {		
-			Map<Object, Object> loadOptions = new HashMap<Object, Object>();
-			loadOptions.put(EMFContext.Attributes.ROOT_ELEMENT, buildingFactory.getBuildingPackage().getBuilding());
-			inRes.load(loadOptions);
-			if(inRes.getContents() != null && inRes.getContents().size() > 0) {
-				if(inRes.getContents().get(0) instanceof Building) {
-					System.out.println("OK!!");
-					Building building = (Building) inRes.getContents().get(0);
-					System.out.println(building);
-					System.out.println(building.getAddress());
-				}
-				else {
-					System.out.println("Wrong instance");
-				}
-			}
-			else {
-				System.out.println("No Contents");
-			};
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-//		
-	}
-
 }

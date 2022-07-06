@@ -14,10 +14,10 @@ package org.gecko.smartmodels.apis.ecore;
 /**
  * 
  * @author ilenia
- * @since Jun 24, 2022
+ * @since Jul 6, 2022
  */
-public interface EcoreSmartModelGenerator {
+public interface EcoreConcreteObjectConverter {
 	
-	public void generateEcoreSmartModel(String pathToYamlInputFile, String pathToEcoreOutputFile);
+	public void createConcreteEObject(String pathToJsonInputFile, String ecoreModelURI, String ecorePackagePrefix);
 
 }
