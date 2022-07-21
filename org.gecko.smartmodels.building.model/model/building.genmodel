@@ -3,7 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.gecko.smartmodels.building.model/src" modelPluginID="org.gecko.smartmodels.building.model"
     modelName="building" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" suppressGenModelAnnotations="false"
-    copyrightFields="false" operationReflection="true" importOrganizing="true" oSGiCompatible="true">
+    copyrightFields="false" usedGenPackages="../../org.gecko.smartmodels.geojson.model/model/geojson.genmodel#//geojson"
+    operationReflection="true" importOrganizing="true" oSGiCompatible="true">
   <foreignModel>building.ecore</foreignModel>
   <genPackages prefix="Building" basePackage="org.gecko.smartmodels.building.model"
       resource="XMI" disposableProviderFactory="true" literalsInterface="false" ecorePackage="building.ecore#/">
@@ -80,6 +81,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/areaServed"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/category"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/collapseRisk"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference building.ecore#//Building/containedInPlace"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/dataProvider"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/dateCreated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/dateModified"/>
@@ -87,6 +89,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/floorsAboveGround"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/floorsBelowGround"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/id"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference building.ecore#//Building/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/occupier"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute building.ecore#//Building/openingHours"/>

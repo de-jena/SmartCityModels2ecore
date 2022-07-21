@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 - 2022 Data In Motion and others.
+ * Copyright (c) 2012 - 2018 Data In Motion and others.
  * All rights reserved. 
  * 
  * This program and the accompanying materials are made available under the terms of the 
@@ -9,48 +9,43 @@
  * Contributors:
  *     Data In Motion - initial API and implementation
  */
-package org.gecko.smartmodels.ecore;
+package org.gecko.smartmodels.tests;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emfjson.jackson.databind.EMFContext;
 import org.gecko.smartmodels.apis.ecore.EcoreConcreteObjectConverter;
-import org.gecko.smartmodels.building.model.building.BuildingFactory;
-import org.osgi.service.component.ComponentServiceObjects;
+import org.gecko.smartmodels.building.model.building.Building;
+import org.gecko.smartmodels.geojson.model.geojson.Polygon;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-/**
- * 
- * @author ilenia
- * @since Jul 6, 2022
- */
-@Component(name = "EcoreConcreteObjectConverter")
+@Component(name="EcoreConcreteObjectConverter")
 public class EcoreConcreteObjectConverterImpl implements EcoreConcreteObjectConverter {
 	
 	@Reference
-	private ComponentServiceObjects<ResourceSet> resourceSetFactory;
-	
-	@Reference
-	BuildingFactory buildingFactory;	
+	private ResourceSet resourceSet;
 
-	
 	/* 
 	 * (non-Javadoc)
 	 * @see org.gecko.smartmodels.apis.ecore.EcoreConcreteObjectConverter#createConcreteEObject(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void createConcreteEObject(String pathToJsonInputFile, String ecorePackageURI, String ecorePackagePrefix) {
-		ResourceSet resourceSet = resourceSetFactory.getService();
+	public void createConcreteEObject(String pathToJsonInputFile, String ecoreModelURI, String ecorePackagePrefix) {
 		Registry packageRegistry = resourceSet.getPackageRegistry();
-		EPackage ePackage = packageRegistry.getEPackage(ecorePackageURI);
+		EPackage ePackage = packageRegistry.getEPackage(ecoreModelURI);
+		if(ePackage == null) {
+			System.out.println("EPackage " + ecoreModelURI + " not found!");
+			return;
+		}
 		EClass eclass = (EClass) ePackage.getEClassifier(ecorePackagePrefix);
 		Resource inRes = resourceSet.createResource(URI.createFileURI(pathToJsonInputFile));
 		try {		
@@ -61,6 +56,16 @@ public class EcoreConcreteObjectConverterImpl implements EcoreConcreteObjectConv
 				if(inRes.getContents().get(0).eClass().equals(eclass)) {
 					System.out.println("Classes are equals!!");
 					System.out.println(inRes.getContents().get(0));
+					EObject mainObj = (EObject) inRes.getContents().get(0);
+					for(EObject cont : mainObj.eContents()) {
+						System.out.println(cont);
+					}
+					Building building = (Building) inRes.getContents().get(0);
+					System.out.println("Location " + building.getLocation());
+					if(building.getLocation() instanceof Polygon) {
+						Polygon polygon = (Polygon) building.getLocation();
+						System.out.println("Polygon " + polygon);
+					}
 				}
 				else {
 					System.out.println("Wrong instance");
@@ -71,8 +76,6 @@ public class EcoreConcreteObjectConverterImpl implements EcoreConcreteObjectConv
 			};
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
+		}		
 	}
-
 }

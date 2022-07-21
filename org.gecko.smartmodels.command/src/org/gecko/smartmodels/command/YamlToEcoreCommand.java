@@ -11,31 +11,22 @@
  */
 package org.gecko.smartmodels.command;
 
-import org.osgi.service.component.annotations.*;
-import org.gecko.smartmodels.apis.ecore.EcoreConcreteObjectConverter;
 import org.gecko.smartmodels.apis.ecore.EcoreSmartModelGenerator;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 @Component(service=YamlToEcoreCommand.class, property= {
         "osgi.command.scope=yamltoecore",
-        "osgi.command.function=generateEcore",
-        "osgi.command.function=createConcrete"})
+        "osgi.command.function=generateEcore"
+        })
 public class YamlToEcoreCommand {
 	
 	@Reference
 	private EcoreSmartModelGenerator ecoreSmartModelGen;
-	
-	@Reference
-	private EcoreConcreteObjectConverter ecoreConcreteObjectConverter;
 	
 	public static final String BASE_PATH = System.getProperty("base.path") + "/data/";
 	
 	public void generateEcore(String pathToYamlInputFile, String pathToEcoreOutputFile) {
 		ecoreSmartModelGen.generateEcoreSmartModel(BASE_PATH + pathToYamlInputFile, BASE_PATH + pathToEcoreOutputFile);
 	}
-	
-	public void createConcrete(String pathToJsonInputFile, String ecoreModelPackageURI, String ecorePackagePrefix) {
-		ecoreConcreteObjectConverter.createConcreteEObject(BASE_PATH + pathToJsonInputFile, ecoreModelPackageURI, ecorePackagePrefix);
-//		ecoreSmartModelGen.createConcreteEObject(BASE_PATH + pathToJsonInputFile);
-	}
-
 }

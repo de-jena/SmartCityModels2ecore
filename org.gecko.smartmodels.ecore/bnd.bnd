@@ -9,9 +9,9 @@
 	osgi.core;version='7.0',\
 	osgi.cmpn;version='7.0',\
 	org.gecko.smartmodels.apis;version=latest,\
-	org.gecko.smartmodels.building.model,\
 	org.apache.commons.commons-codec,\
-	org.emfjson.jackson
+	org.emfjson.jackson,\
+	org.gecko.smartmodels.geojson.model;version=latest
 
 Bundle-Version: 1.0.0.SNAPSHOT
 Private-Package: org.gecko.smartmodels.ecore

@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
  * @since Jun 22, 2022
  */
 public class ECoreGeneratorHelper {
-	
+
 	public static final String ANNOTAION_DOC_SOURCE = "http://www.eclipse.org/emf/2002/GenModel";
 
 	private ECoreGeneratorHelper() {};
@@ -48,7 +48,12 @@ public class ECoreGeneratorHelper {
 		eClass.setName(name);
 		return eClass;
 	}
-	
+
+	public static void addSuperType(EClass eClass, EPackage otherPackage, String classifierName) {
+		final EClass eSuperClass = (EClass) otherPackage.getEClassifier(classifierName);
+		eClass.getESuperTypes().add(eSuperClass);
+	}
+
 	public static EEnum createEEnum(final String name, final List<String> values) {
 		final EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
 		eEnum.setName(name);
@@ -90,7 +95,7 @@ public class ECoreGeneratorHelper {
 			addDocumentation(reference, description);
 		}
 	}
-	
+
 	public static void addDocumentation(EClassifier type, String description) {
 		if(description == null) {
 			return;
@@ -100,7 +105,7 @@ public class ECoreGeneratorHelper {
 		annotation.getDetails().put("documentation", description);
 		type.getEAnnotations().add(annotation);
 	}
-	
+
 	public static void addDocumentation(EStructuralFeature feature, String description) {
 		if(description == null) {
 			return;
