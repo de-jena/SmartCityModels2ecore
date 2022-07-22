@@ -53,10 +53,10 @@ public class BuildingFactoryImpl extends EFactoryImpl implements BuildingFactory
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case BuildingPackage.CATEGORY_VALUE:
-				return createCategoryValueFromString(eDataType, initialValue);
-			case BuildingPackage.TYPE_VALUE:
-				return createTypeValueFromString(eDataType, initialValue);
+			case BuildingPackage.BUILDING_CATEGORY_VALUE:
+				return createBuildingCategoryValueFromString(eDataType, initialValue);
+			case BuildingPackage.BUILDING_TYPE_VALUE:
+				return createBuildingTypeValueFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -70,10 +70,10 @@ public class BuildingFactoryImpl extends EFactoryImpl implements BuildingFactory
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case BuildingPackage.CATEGORY_VALUE:
-				return convertCategoryValueToString(eDataType, instanceValue);
-			case BuildingPackage.TYPE_VALUE:
-				return convertTypeValueToString(eDataType, instanceValue);
+			case BuildingPackage.BUILDING_CATEGORY_VALUE:
+				return convertBuildingCategoryValueToString(eDataType, instanceValue);
+			case BuildingPackage.BUILDING_TYPE_VALUE:
+				return convertBuildingTypeValueToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -106,8 +106,8 @@ public class BuildingFactoryImpl extends EFactoryImpl implements BuildingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CategoryValue createCategoryValueFromString(EDataType eDataType, String initialValue) {
-		CategoryValue result = CategoryValue.get(initialValue);
+	public BuildingCategoryValue createBuildingCategoryValueFromString(EDataType eDataType, String initialValue) {
+		BuildingCategoryValue result = BuildingCategoryValue.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -117,7 +117,7 @@ public class BuildingFactoryImpl extends EFactoryImpl implements BuildingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertCategoryValueToString(EDataType eDataType, Object instanceValue) {
+	public String convertBuildingCategoryValueToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -126,8 +126,8 @@ public class BuildingFactoryImpl extends EFactoryImpl implements BuildingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeValue createTypeValueFromString(EDataType eDataType, String initialValue) {
-		TypeValue result = TypeValue.get(initialValue);
+	public BuildingTypeValue createBuildingTypeValueFromString(EDataType eDataType, String initialValue) {
+		BuildingTypeValue result = BuildingTypeValue.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -137,7 +137,7 @@ public class BuildingFactoryImpl extends EFactoryImpl implements BuildingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertTypeValueToString(EDataType eDataType, Object instanceValue) {
+	public String convertBuildingTypeValueToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
