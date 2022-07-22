@@ -3,7 +3,7 @@
 org.geckoprojects.emf:org.gecko.emf.osgi.bnd.library.workspace:4.1.1-SNAPSHOT
 
 org.yaml:snakeyaml:1.30
-org.emfjson:emfjson-jackson:1.3.0
+#org.emfjson:emfjson-jackson:1.3.0
 org.gecko.runtime:org.gecko.templates:1.0.31
 
 org.osgi:org.osgi.test.junit5:1.1.0
@@ -31,14 +31,17 @@ org.apache.felix:org.apache.felix.framework:7.0.4
 
 commons-codec:commons-codec:1.15
 
-com.fasterxml.jackson.core:jackson-annotations:2.9.7
-com.fasterxml.jackson.core:jackson-core:2.9.7
-com.fasterxml.jackson.core:jackson-databind:2.9.7
-com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.7
-com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.9.7
+com.fasterxml.jackson.core:jackson-core:2.13.2
+com.fasterxml.jackson.core:jackson-databind:2.13.2
+com.fasterxml.jackson.core:jackson-annotations:2.13.2
+com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.13.2
+com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2
 
 org.jline:jline-builtins:3.17.1
 org.jline:jline-reader:3.17.1
 org.jline:jline-terminal:3.17.1
+
+org.eclipse.emfcloud:emfjson-jackson:2.1.0-SNAPSHOT
+
 
 

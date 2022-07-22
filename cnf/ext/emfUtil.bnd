@@ -1,2 +1,2 @@
--include: \
-	https://gitlab.com/gecko.io/geckoEMFUtil/-/raw/main/cnf/geckoEMFUtil/geckoEMFUtil.bnd
+#-include: \
+	#https://gitlab.com/gecko.io/geckoEMFUtil/-/raw/main/cnf/geckoEMFUtil/geckoEMFUtil.bnd

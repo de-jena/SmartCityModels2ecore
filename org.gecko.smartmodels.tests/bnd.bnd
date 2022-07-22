@@ -8,9 +8,10 @@
 	osgi.core;version='7.0',\
 	osgi.cmpn;version='7.0',\
 	org.gecko.smartmodels.apis,\
-	org.emfjson.jackson,\
 	org.gecko.smartmodels.building.model;version=latest,\
-	org.gecko.smartmodels.geojson.model;version=latest
+	org.gecko.smartmodels.geojson.model;version=latest,\
+	org.gecko.emf.json,\
+	org.eclipse.emfcloud.emfjson-jackson
 
 Bundle-Version: 1.0.0.SNAPSHOT
 Private-Package: org.gecko.smartmodels.tests

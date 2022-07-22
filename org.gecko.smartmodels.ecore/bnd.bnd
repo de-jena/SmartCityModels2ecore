@@ -10,7 +10,6 @@
 	osgi.cmpn;version='7.0',\
 	org.gecko.smartmodels.apis;version=latest,\
 	org.apache.commons.commons-codec,\
-	org.emfjson.jackson,\
 	org.gecko.smartmodels.geojson.model;version=latest
 
 Bundle-Version: 1.0.0.SNAPSHOT
