@@ -99,7 +99,6 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 						Map<String, Object> xngsiMap = (Map<String, Object>) valueMap.get(YamlReader.YAML_XNGSI_KEY);
 						if(xngsiMap.containsKey(YamlReader.YAML_TYPE_KEY)) {
 							if(YamlReader.YAML_XGSI_TYPE_GEOPROPERTY.equals(xngsiMap.get(YamlReader.YAML_TYPE_KEY))) {
-								System.out.println("Found GeoProperty for " + k);
 //								Resource jsonRes = resourceSet.getResource(URI.createFileURI(System.getProperty("base.path")+"/../org.gecko.smartmodels.geojson.model/model/geojson.ecore"), true); 
 //								EPackage jsonPack = (EPackage) jsonRes.getContents().get(0);
 								ECoreGeneratorHelper.addReference(eClass, k, geojsonPackage.getEClassifier("Geometry"), lowerBound, upperBound, extractElementDescription(valueMap), true);

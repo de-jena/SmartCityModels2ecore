@@ -22,7 +22,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" upperBound="-1"
-        eType="#//CategoryValue"/>
+        eType="#//BuildingCategoryValue"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="collapseRisk" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Probability of total collapse of the building."/>
@@ -114,7 +114,7 @@
         <details key="documentation" value="A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//TypeValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//BuildingTypeValue">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="NGSI Entity type"/>
       </eAnnotations>
@@ -155,7 +155,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="CategoryValue">
+  <eClassifiers xsi:type="ecore:EEnum" name="BuildingCategoryValue">
     <eLiterals name="apartments"/>
     <eLiterals name="bakehouse" value="1"/>
     <eLiterals name="barn" value="2"/>
@@ -219,7 +219,7 @@
     <eLiterals name="warehouse" value="60"/>
     <eLiterals name="water_tower" value="61"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="TypeValue">
+  <eClassifiers xsi:type="ecore:EEnum" name="BuildingTypeValue">
     <eLiterals name="Building"/>
   </eClassifiers>
 </ecore:EPackage>
