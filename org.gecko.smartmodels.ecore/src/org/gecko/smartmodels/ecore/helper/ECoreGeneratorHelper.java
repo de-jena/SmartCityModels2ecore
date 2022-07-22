@@ -31,7 +31,8 @@ import org.eclipse.emf.ecore.EcoreFactory;
  */
 public class ECoreGeneratorHelper {
 
-	public static final String ANNOTAION_DOC_SOURCE = "http://www.eclipse.org/emf/2002/GenModel";
+	private static final String ANNOTAION_DOC_SOURCE = "http://www.eclipse.org/emf/2002/GenModel";
+	private static final String ENUM_TYPE_SUFFIX = "Value";
 
 	private ECoreGeneratorHelper() {};
 
@@ -54,9 +55,9 @@ public class ECoreGeneratorHelper {
 		eClass.getESuperTypes().add(eSuperClass);
 	}
 
-	public static EEnum createEEnum(final String name, final List<String> values) {
+	public static EEnum createEEnum(String className, final String enumName, final List<String> values) {
 		final EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
-		eEnum.setName(name);
+		eEnum.setName(className + enumName.substring(0, 1).toUpperCase() + enumName.substring(1)+ENUM_TYPE_SUFFIX);
 		values.stream().forEach(v -> {
 			final EEnumLiteral literal = EcoreFactory.eINSTANCE.createEEnumLiteral();
 			literal.setName(v);

@@ -49,6 +49,7 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 
 	public static final String ECORE_URL_PREFIX = "http://smartmodels.com/";
 	public static final String ECORE_URL_VERSION = "/1.0";
+	
 
 	/* 
 	 * (non-Javadoc)
@@ -91,24 +92,21 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 					doConvertProperty(k, propertyType, valueMap, lowerBound, upperBound, eClass, mainEPackage);						
 				}
 				else if(valueMap.containsKey(YamlReader.YAML_ANYOF_KEY)) {
-//					System.out.println("AnyOf: " + k);
-//					System.out.println("AnyOf Value: " + valueMap.get(YamlReader.YAML_ANYOF_KEY));
-					extractAnyOf(k, (List<Map<String, Object>>) valueMap.get(YamlReader.YAML_ANYOF_KEY), lowerBound, upperBound, eClass, mainEPackage, extractElementDescription(valueMap));
+					extractMultipleTypes(k, (List<Map<String, Object>>) valueMap.get(YamlReader.YAML_ANYOF_KEY), lowerBound, upperBound, eClass, mainEPackage, extractElementDescription(valueMap));
 				}
 				else if(valueMap.containsKey(YamlReader.YAML_ONEOF_KEY)) {
-					System.out.println("OneOf: " + k);
 					if(valueMap.containsKey(YamlReader.YAML_XNGSI_KEY)) {
 						Map<String, Object> xngsiMap = (Map<String, Object>) valueMap.get(YamlReader.YAML_XNGSI_KEY);
 						if(xngsiMap.containsKey(YamlReader.YAML_TYPE_KEY)) {
 							if(YamlReader.YAML_XGSI_TYPE_GEOPROPERTY.equals(xngsiMap.get(YamlReader.YAML_TYPE_KEY))) {
 								System.out.println("Found GeoProperty for " + k);
-								Resource jsonRes = resourceSet.getResource(URI.createFileURI(System.getProperty("base.path")+"/../org.gecko.smartmodels.geojson.model/model/geojson.ecore"), true); 
-								EPackage jsonPack = (EPackage) jsonRes.getContents().get(0);
-								ECoreGeneratorHelper.addReference(eClass, k, jsonPack.getEClassifier("Geometry"), lowerBound, upperBound, extractElementDescription(valueMap), true);
+//								Resource jsonRes = resourceSet.getResource(URI.createFileURI(System.getProperty("base.path")+"/../org.gecko.smartmodels.geojson.model/model/geojson.ecore"), true); 
+//								EPackage jsonPack = (EPackage) jsonRes.getContents().get(0);
+								ECoreGeneratorHelper.addReference(eClass, k, geojsonPackage.getEClassifier("Geometry"), lowerBound, upperBound, extractElementDescription(valueMap), true);
 							}
 						}
 					}
-					extractAnyOf(k, (List<Map<String, Object>>) valueMap.get(YamlReader.YAML_ONEOF_KEY), lowerBound, upperBound, eClass, mainEPackage, extractElementDescription(valueMap));
+					extractMultipleTypes(k, (List<Map<String, Object>>) valueMap.get(YamlReader.YAML_ONEOF_KEY), lowerBound, upperBound, eClass, mainEPackage, extractElementDescription(valueMap));
 
 				}
 			});
@@ -119,35 +117,60 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 	} 
 	
 	@SuppressWarnings("unchecked")
-	private void extractAnyOf(String propertyName, List<Map<String, Object> > possibleValuesList, int lowerBound, int upperBound, EClass mainEcoreClass, EPackage mainEcorePackage, String description) {
+	private void extractMultipleTypes(String propertyName, List<Map<String, Object> > possibleValuesList, int lowerBound, int upperBound, EClass mainEcoreClass, EPackage mainEcorePackage, String description) {
 		List<String> possibleTypes = possibleValuesList.stream().filter(m -> m.containsKey(YamlReader.YAML_TYPE_KEY))
 				.map(m -> (String) m.get(YamlReader.YAML_TYPE_KEY)).distinct().collect(Collectors.toList());
 		List<String> possibleAnyOfTypes = possibleValuesList.stream().filter(m -> m.containsKey(YamlReader.YAML_ANYOF_KEY))
 				.map(m -> (List<Map<String, Object> >) m.get(YamlReader.YAML_ANYOF_KEY)).flatMap(l -> l.stream()).filter(m -> m.containsKey(YamlReader.YAML_TYPE_KEY))
 				.map(m -> (String) m.get(YamlReader.YAML_TYPE_KEY)).distinct().collect(Collectors.toList());
+		List<String> possibleOneOfTypes = possibleValuesList.stream().filter(m -> m.containsKey(YamlReader.YAML_ONEOF_KEY))
+				.map(m -> (List<Map<String, Object> >) m.get(YamlReader.YAML_ONEOF_KEY)).flatMap(l -> l.stream()).filter(m -> m.containsKey(YamlReader.YAML_TYPE_KEY))
+				.map(m -> (String) m.get(YamlReader.YAML_TYPE_KEY)).distinct().collect(Collectors.toList());
 		possibleTypes.addAll(possibleAnyOfTypes);
+		possibleTypes.addAll(possibleOneOfTypes);
 		possibleTypes = possibleTypes.stream().distinct().collect(Collectors.toList());
+		
+//		Case: all the possible types are actually the same
 		if(possibleTypes.size() == 1) {
-//			System.out.println("Only one type for " + propertyName + ": " + possibleTypes.get(0));
 			String propertyType = possibleTypes.get(0);
 			switch(propertyType) {
 			case YamlReader.YAML_STRING_TYPE:
 				ECoreGeneratorHelper
 				.addAttribute(mainEcoreClass, propertyName, EcorePackage.Literals.ESTRING, false, lowerBound, upperBound, description);
+				break;
+			case YamlReader.YAML_INTEGER_TYPE:
+				ECoreGeneratorHelper
+				.addAttribute(mainEcoreClass, propertyName, EcorePackage.Literals.EINTEGER_OBJECT, false, lowerBound, upperBound, description);
+				break;
+			case YamlReader.YAML_NUMBER_TYPE:
+				ECoreGeneratorHelper
+				.addAttribute(mainEcoreClass, propertyName, EcorePackage.Literals.EDOUBLE_OBJECT, false, lowerBound, upperBound, description);
+				break;
+			case YamlReader.YAML_ARRAY_TYPE:
+//				TODO: if all the possible types are array we have to check what can be inside each array...
+				break;
+			case YamlReader.YAML_OBJECT_TYPE:
+//				TODO: if all the possible types are object we have to check which kind of object they are. We can set the ref to a general 
+//				      EObject, and then add an annotation with the possible actual objects they might be
 			}
-//			TODO add support for other types
 		}
-//		TODO add support in case multiple types are found
-		
+/*		TODO add support in case multiple types are found:
+			 We can have different cases here:
+			 	1. A simple object and a complex object (a String and an Address)
+			 	2. A simple object and an array of simple objects (a String and an array of String)
+			 	3. Multiple different simple objects (a String and an Integer)
+*/		
 	}
 
+	@SuppressWarnings("unchecked")
 	private void doConvertProperty(String propertyName, String propertyType, Map<String, Object> propertyValueMap, int lowerBound, int upperBound, EClass mainEcoreClass, EPackage mainEcorePackage) {
 
 		String propertyDescription = extractElementDescription(propertyValueMap);
 		switch(propertyType) {
 		case YamlReader.YAML_STRING_TYPE:	
 			if(propertyValueMap.containsKey(YamlReader.YAML_ENUM_KEY)) {
-				EEnum eEnum = generateEEnum(mainEcorePackage, propertyValueMap, propertyName);
+				EEnum eEnum = ECoreGeneratorHelper.createEEnum(mainEcoreClass.getName(), propertyName, (List<String>) propertyValueMap.get(YamlReader.YAML_ENUM_KEY));
+				mainEcorePackage.getEClassifiers().add(eEnum);
 				ECoreGeneratorHelper.addAttribute(mainEcoreClass, propertyName, eEnum, false, lowerBound, upperBound, propertyDescription);
 			}
 			else {
@@ -192,24 +215,20 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 				doConvertProperty(propertyName, itemsType, itemsMap, lowerBound, upperBound, mainEcoreClass, mainEcorePackage);
 			}
 			else if(itemsMap.containsKey(YamlReader.YAML_ANYOF_KEY)) {
-//				System.out.println("Items AnyOf: " + propertyName);					
-				extractAnyOf(propertyName, (List<Map<String, Object>>) itemsMap.get(YamlReader.YAML_ANYOF_KEY), lowerBound, upperBound, mainEcoreClass, mainEcorePackage, propertyDescription);
+				extractMultipleTypes(propertyName, (List<Map<String, Object>>) itemsMap.get(YamlReader.YAML_ANYOF_KEY), lowerBound, upperBound, mainEcoreClass, mainEcorePackage, propertyDescription);
 			}
 			else if(itemsMap.containsKey(YamlReader.YAML_ONEOF_KEY)) {
-//				System.out.println("Items OneOf: " + propertyName);
-//				System.out.println("Items OneOf: " + itemsMap.get(YamlReader.YAML_ONEOF_KEY));
-				extractAnyOf(propertyName, (List<Map<String, Object>>) itemsMap.get(YamlReader.YAML_ONEOF_KEY), lowerBound, upperBound, mainEcoreClass, mainEcorePackage, propertyDescription);
+				extractMultipleTypes(propertyName, (List<Map<String, Object>>) itemsMap.get(YamlReader.YAML_ONEOF_KEY), lowerBound, upperBound, mainEcoreClass, mainEcorePackage, propertyDescription);
 			}
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	private EEnum generateEEnum(EPackage mainEcorePackage, Map<String, Object> yamlContent, String enumName) {
-		enumName = enumName.substring(0, 1).toUpperCase() + enumName.substring(1)+"Value";
-		EEnum eEnum = ECoreGeneratorHelper.createEEnum(enumName, (List<String>) yamlContent.get(YamlReader.YAML_ENUM_KEY));
-		mainEcorePackage.getEClassifiers().add(eEnum);
-		return eEnum;
-	}
+//	@SuppressWarnings("unchecked")
+//	private EEnum generateEEnum(EClass mainEcoreClass, EPackage mainEcorePackage, Map<String, Object> yamlContent, String enumName) {
+//		EEnum eEnum = ECoreGeneratorHelper.createEEnum(mainEcoreClass.getName(), enumName, (List<String>) yamlContent.get(YamlReader.YAML_ENUM_KEY));
+//		mainEcorePackage.getEClassifiers().add(eEnum);
+//		return eEnum;
+//	}
 
 	private String extractElementDescription(Map<String, Object> yamlContent) {
 		String description = null;
@@ -231,12 +250,8 @@ public class EcoreSmartModelGeneratorImpl implements EcoreSmartModelGenerator {
 
 	private void saveEcoreModel(String pathToEcoreOutputFile, EPackage mainEcorePackage) {
 		try {
-//			ResourceSet resourceSet = resourceSetFactory.getService();
 			Resource outputRes = resourceSet.createResource(URI.createFileURI(pathToEcoreOutputFile));
 			outputRes.getContents().add(mainEcorePackage);
-//			Resource jsonRes = resourceSet.getResource(URI.createFileURI("../org.gecko.smartmodels.geojson.model/model/geojson.ecore"), true); 
-//			jsonRes.save(Collections.emptyMap());
-//			outputRes.getContents().add(geojsonPackage);
 			outputRes.save(Collections.emptyMap());
 		} catch(IOException e) {
 			throw new RuntimeException("Error saving ecore model " + e);
