@@ -13,13 +13,13 @@ package org.gecko.smartmodels.yaml;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
 import org.gecko.smartmodels.apis.yaml.YamlReader;
 import org.osgi.service.component.annotations.Component;
-import org.yaml.snakeyaml.Yaml;
+import org.snakeyaml.engine.v2.api.Load;
+import org.snakeyaml.engine.v2.api.LoadSettings;
 
 /**
  * 
@@ -28,23 +28,25 @@ import org.yaml.snakeyaml.Yaml;
  */
 @Component(name = "YamlReader")
 public class YamlReaderImpl implements YamlReader {
-	
-	
+
+
 	/* 
 	 * (non-Javadoc)
 	 * @see org.gecko.smartmodels.apis.yaml.YamlReader#readYamlFile(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getYamlContent(String yamlFilePath) {
 		try {
 			InputStream inputStream = new FileInputStream(new File(yamlFilePath));
-			Yaml yaml = new Yaml();
-			Map<String, Object> yamlContent = yaml.load(inputStream);
+			LoadSettings settings = LoadSettings.builder().setLabel("Custom user configuration").build();
+			Load load = new Load(settings);
+			Map<String, Object> yamlContent = (Map<String, Object>) load.loadFromInputStream(inputStream);
 			return yamlContent;
-		} catch (IOException e) {
-			throw new RuntimeException("Error reading yaml content " + e);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Something went wrong while parsing yaml file " + yamlFilePath);
 		}
-		
 	}
 
 }

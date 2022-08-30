@@ -17,12 +17,16 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+
 
 /**
  * 
@@ -49,24 +53,56 @@ public class ECoreGeneratorHelper {
 		eClass.setName(name);
 		return eClass;
 	}
+	
+	public static EDataType createEDataType(final String name) {
+		final EDataType eDataType = EcoreFactory.eINSTANCE.createEDataType();
+		eDataType.setName(name);
+		return eDataType;
+	}
 
+	public static EOperation createEOperation(final String name, final List<EParameter> parameters, final EClassifier returnType) {
+		final EOperation eOperation = EcoreFactory.eINSTANCE.createEOperation();
+		eOperation.setName(name);
+		if(returnType != null) {
+			eOperation.setEType(returnType);
+		}
+		eOperation.getEParameters().addAll(parameters);
+		return eOperation;
+	}
+	
+	public static EParameter createEParameter(final String name, final EClassifier type) {
+		EParameter eParameter = EcoreFactory.eINSTANCE.createEParameter();
+		eParameter.setName(name);
+		eParameter.setEType(type);
+		return eParameter;
+	}
+	
 	public static void addSuperType(EClass eClass, EPackage otherPackage, String classifierName) {
 		final EClass eSuperClass = (EClass) otherPackage.getEClassifier(classifierName);
 		eClass.getESuperTypes().add(eSuperClass);
 	}
 
-	public static EEnum createEEnum(String className, final String enumName, final List<String> values) {
+	public static EEnum createEEnum(String className, final String enumName, final List<?> values) {
 		final EEnum eEnum = EcoreFactory.eINSTANCE.createEEnum();
 		eEnum.setName(className + enumName.substring(0, 1).toUpperCase() + enumName.substring(1)+ENUM_TYPE_SUFFIX);
 		values.stream().forEach(v -> {
 			final EEnumLiteral literal = EcoreFactory.eINSTANCE.createEEnumLiteral();
-			literal.setName(v);
+			literal.setName(v.toString());
 			literal.setValue(eEnum.getELiterals().size());
 			eEnum.getELiterals().add(literal);
 		});
 		return eEnum;
 	}
 
+	/**
+	 * @param eClass
+	 * @param name
+	 * @param type
+	 * @param isId
+	 * @param lowerBound
+	 * @param upperBound
+	 * @param description
+	 */
 	public static void addAttribute(EClass eClass, String name, EClassifier type, boolean isId, 
 			int lowerBound, int upperBound, String description) {
 		final EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
@@ -82,6 +118,15 @@ public class ECoreGeneratorHelper {
 		}
 	}
 
+	/**
+	 * @param eClass
+	 * @param name
+	 * @param type
+	 * @param lowerBound
+	 * @param upperBound
+	 * @param description
+	 * @param isContainment
+	 */
 	public static void addReference(EClass eClass, String name, EClassifier type, 
 			int lowerBound, int upperBound, String description, boolean isContainment) {
 		final EReference reference = EcoreFactory.eINSTANCE.createEReference();

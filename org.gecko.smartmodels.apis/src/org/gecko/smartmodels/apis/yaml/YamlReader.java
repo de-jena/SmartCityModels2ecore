@@ -22,6 +22,7 @@ public interface YamlReader {
 	
 	public static final String YAML_DESCRIPTION_KEY = "description";
 	public static final String YAML_PROPERTIES_KEY = "properties";
+	public static final String YAML_VALUES_KEY = "values";
 	public static final String YAML_TYPE_KEY = "type";
 	public static final String YAML_ANYOF_KEY = "anyOf";
 	public static final String YAML_ONEOF_KEY = "oneOf";
@@ -37,8 +38,10 @@ public interface YamlReader {
 	public static final String YAML_NUMBER_TYPE = "number";
 	public static final String YAML_INTEGER_TYPE = "integer";
 	public static final String YAML_ARRAY_TYPE = "array";
+	public static final String YAML_BOOLEAN_TYPE = "boolean";
 	
-	public static final String YAML_XGSI_TYPE_GEOPROPERTY = "Geoproperty";
+	public static final String YAML_XNGSI_TYPE_GEOPROPERTY = "Geoproperty";
+	public static final String YAML_XNGSI_MODEL_KEY = "model";
 	
 	Map<String, Object> getYamlContent(String yamlFilePath);
 	

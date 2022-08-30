@@ -18,6 +18,13 @@ package org.gecko.smartmodels.apis.ecore;
  */
 public interface EcoreSmartModelGenerator {
 	
-	public void generateEcoreSmartModel(String pathToYamlInputFile, String pathToEcoreOutputFile);
+	public static final String ECORE_URL_PREFIX = "http://smartmodels.com/";
+	public static final String ECORE_URL_VERSION = "/1.0";	
+	
+	public boolean canHandleFileFormat(String pathToInputFile);
+	
+	public void generateEcoreSmartModels(String pathToInFolder, String pathToEcoreOutFolder);
+	
+	public void generateEcoreSmartModel(String pathToInputFile, String pathToEcoreOutputFile);
 
 }
