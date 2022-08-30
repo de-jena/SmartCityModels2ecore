@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<repository xmlns="http://www.osgi.org/xmlns/repository/v1.0.0" name="Local" increment="1658463167984">
+<repository xmlns="http://www.osgi.org/xmlns/repository/v1.0.0" name="Local" increment="1658923153952">
   <resource>
     <capability namespace="osgi.identity">
       <attribute name="osgi.identity" value="org.apiguardian"/>
@@ -39,11 +39,11 @@
       <attribute name="documentation" value="https://github.com/geckoprojects-org/org.gecko.emf.util"/>
       <attribute name="description" value="Extension to save and load EMF objects in/to JSON using JacksonXML"/>
       <attribute name="type" value="osgi.bundle"/>
-      <attribute name="version" value="1.4.1.202207220408-SNAPSHOT" type="Version"/>
+      <attribute name="version" value="1.4.1.202207271158-SNAPSHOT" type="Version"/>
     </capability>
     <capability namespace="osgi.wiring.package">
       <attribute name="bundle-symbolic-name" value="org.gecko.emf.json"/>
-      <attribute name="bundle-version" value="1.4.1.202207220408-SNAPSHOT" type="Version"/>
+      <attribute name="bundle-version" value="1.4.1.202207271158-SNAPSHOT" type="Version"/>
       <attribute name="version" value="1.0.0" type="Version"/>
       <attribute name="osgi.wiring.package" value="org.gecko.emf.json.annotation"/>
       <attribute name="bnd.hashes" value="-494121535,-1923478059" type="List&lt;Long&gt;"/>
@@ -51,24 +51,24 @@
     <capability namespace="osgi.wiring.package">
       <directive name="uses" value="com.fasterxml.jackson.databind,org.eclipse.emf.common.util,org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.xmi,org.eclipse.emfcloud.jackson.handlers,org.eclipse.emfcloud.jackson.resource"/>
       <attribute name="bundle-symbolic-name" value="org.gecko.emf.json"/>
-      <attribute name="bundle-version" value="1.4.1.202207220408-SNAPSHOT" type="Version"/>
+      <attribute name="bundle-version" value="1.4.1.202207271158-SNAPSHOT" type="Version"/>
       <attribute name="version" value="1.1.0" type="Version"/>
       <attribute name="osgi.wiring.package" value="org.gecko.emf.json.configuration"/>
       <attribute name="bnd.hashes" value="1676914447,-89203973,52788176,-1923478059" type="List&lt;Long&gt;"/>
     </capability>
     <capability namespace="osgi.wiring.package">
       <attribute name="bundle-symbolic-name" value="org.gecko.emf.json"/>
-      <attribute name="bundle-version" value="1.4.1.202207220408-SNAPSHOT" type="Version"/>
+      <attribute name="bundle-version" value="1.4.1.202207271158-SNAPSHOT" type="Version"/>
       <attribute name="version" value="1.1.0" type="Version"/>
       <attribute name="osgi.wiring.package" value="org.gecko.emf.json.constants"/>
       <attribute name="bnd.hashes" value="66086535,-1923478059" type="List&lt;Long&gt;"/>
     </capability>
     <capability namespace="osgi.wiring.bundle">
-      <attribute name="bundle-version" value="1.4.1.202207220408-SNAPSHOT" type="Version"/>
+      <attribute name="bundle-version" value="1.4.1.202207271158-SNAPSHOT" type="Version"/>
       <attribute name="osgi.wiring.bundle" value="org.gecko.emf.json"/>
     </capability>
     <capability namespace="osgi.wiring.host">
-      <attribute name="bundle-version" value="1.4.1.202207220408-SNAPSHOT" type="Version"/>
+      <attribute name="bundle-version" value="1.4.1.202207271158-SNAPSHOT" type="Version"/>
       <attribute name="osgi.wiring.host" value="org.gecko.emf.json"/>
     </capability>
     <capability namespace="emf.configurator">
@@ -78,10 +78,10 @@
       <attribute name="emf.configurator" value="resourceSet"/>
     </capability>
     <capability namespace="osgi.content">
-      <attribute name="size" value="33340" type="Long"/>
+      <attribute name="size" value="33572" type="Long"/>
       <attribute name="url" value="org.gecko.emf.json/org.gecko.emf.json-1.4.1.jar"/>
       <attribute name="mime" value="application/vnd.osgi.bundle"/>
-      <attribute name="osgi.content" value="C37A177DCD2E183FF48440F1F3E363889CC0B656B8448A88DBA5F8C73717AD24"/>
+      <attribute name="osgi.content" value="F4DD191DC9319CF3C2675ACAE1EF4AA3BB3693CDC0423B994DED04D1C5DDD5D5"/>
     </capability>
     <capability namespace="osgi.service">
       <directive name="uses" value="org.gecko.emf.osgi"/>
@@ -126,10 +126,6 @@
     <requirement namespace="osgi.wiring.package">
       <directive name="filter" value="(osgi.wiring.package=java.lang.invoke)"/>
       <attribute name="osgi.wiring.package" value="java.lang.invoke"/>
-    </requirement>
-    <requirement namespace="osgi.wiring.package">
-      <directive name="filter" value="(osgi.wiring.package=java.lang.reflect)"/>
-      <attribute name="osgi.wiring.package" value="java.lang.reflect"/>
     </requirement>
     <requirement namespace="osgi.wiring.package">
       <directive name="filter" value="(osgi.wiring.package=java.text)"/>
