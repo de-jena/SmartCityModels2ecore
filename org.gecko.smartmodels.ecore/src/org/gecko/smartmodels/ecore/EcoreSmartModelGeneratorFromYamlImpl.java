@@ -36,7 +36,6 @@ import org.gecko.smartmodels.apis.ecore.EcoreSmartModelGenerator;
 import org.gecko.smartmodels.apis.yaml.YamlReader;
 import org.gecko.smartmodels.ecore.helper.ECoreGeneratorHelper;
 import org.gecko.smartmodels.geojson.model.geojson.GeojsonPackage;
-import org.gecko.smartmodels.schema.model.schema.SchemaPackage;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -54,8 +53,8 @@ public class EcoreSmartModelGeneratorFromYamlImpl implements EcoreSmartModelGene
 	@Reference
 	GeojsonPackage geojsonPackage;
 
-	@Reference
-	SchemaPackage schemaPackage;
+//	@Reference
+//	SchemaPackage schemaPackage;
 
 
 	private static final String YAML_FILE_EXTENSION = ".yaml";

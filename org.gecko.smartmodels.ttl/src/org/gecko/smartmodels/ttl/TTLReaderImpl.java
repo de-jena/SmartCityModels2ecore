@@ -38,9 +38,9 @@ public class TTLReaderImpl implements TTLReader{
 	public TTLModel readTTLFile(String pathToTTLFile) {
 		Model model = RDFDataMgr.loadModel(pathToTTLFile) ;
 		
-//		This will give us both classses and DataTypes since they are listed as classes as well, in addition to as data types
+//		This might give us both classes and DataTypes since they are listed as classes as well, in addition to as data types
 		List<Resource> classList = extractStatements(model, TTLReaderHelper.PREDICATE_TYPE,  
-				st -> TTLReaderHelper.OBJECT_CLASS_TYPE.equals(st.getObject().toString()))
+				st -> TTLReaderHelper.OBJECT_CLASS_TYPE.equals(st.getObject().toString()) || TTLReaderHelper.OWL_OBJECT_CLASS_TYPE.equals(st.getObject().toString()))
 				.stream().map(st -> st.getSubject()).collect(Collectors.toList());
 		
 //		We filter to keep only the data types
@@ -55,6 +55,13 @@ public class TTLReaderImpl implements TTLReader{
 			}
 			return false;
 		}).distinct().collect(Collectors.toList());
+		
+//		We check for data types also under another namespace
+		List<Resource> additionalDataTypeList = extractStatements(model, TTLReaderHelper.PREDICATE_TYPE,  
+				st -> TTLReaderHelper.RDF_OBJECT_DATATYPE_TYPE.equals(st.getObject().toString()))
+				.stream().map(st -> st.getSubject()).collect(Collectors.toList());
+		dataTypeList.addAll(additionalDataTypeList);
+		dataTypeList = dataTypeList.stream().distinct().collect(Collectors.toList());
 
 //		We filter to keep only the class (no data types)
 		classList = classList.stream().filter(r -> {
@@ -87,7 +94,8 @@ public class TTLReaderImpl implements TTLReader{
 		List<String> dataTypesNameList = dataTypeList.stream().map(r -> r.getNameSpace() + r.getLocalName()).collect(Collectors.toList());
 		ttlModel.getDataTypesList().addAll(dataTypesNameList);
 		
-		List<Resource> propList = extractStatements(model, TTLReaderHelper.PREDICATE_TYPE, st -> TTLReaderHelper.OBJECT_PROPERTY_TYPE.equals(st.getObject().toString()))
+		List<Resource> propList = extractStatements(model, TTLReaderHelper.PREDICATE_TYPE, 
+				st -> TTLReaderHelper.OBJECT_PROPERTY_TYPE.equals(st.getObject().toString()) || TTLReaderHelper.OWL_OBJECT_PROPERTY_TYPE.equals(st.getObject().toString()))
 				.stream().map(st -> st.getSubject()).distinct().collect(Collectors.toList());
 		
 		propList.stream().forEach(r -> {
@@ -103,8 +111,32 @@ public class TTLReaderImpl implements TTLReader{
 					ttlModel.getPropertyDomainMap().get(r.getNameSpace()+r.getLocalName()).add(propIter.nextStatement().getObject().toString());
 				}
 			}
+			if(r.hasProperty(model.getProperty(TTLReaderHelper.DCAT_PREDICATE_DOMAIN_INCLUDES))) {
+				StmtIterator propIter = r.listProperties(model.getProperty(TTLReaderHelper.DCAT_PREDICATE_DOMAIN_INCLUDES));
+				while(propIter.hasNext()) {
+					ttlModel.getPropertyDomainMap().get(r.getNameSpace()+r.getLocalName()).add(propIter.nextStatement().getObject().toString());
+				}
+			}
+			if(r.hasProperty(model.getProperty(TTLReaderHelper.RDF_PREDICATE_DOMAIN_INCLUDES))) {
+				StmtIterator propIter = r.listProperties(model.getProperty(TTLReaderHelper.RDF_PREDICATE_DOMAIN_INCLUDES));
+				while(propIter.hasNext()) {
+					ttlModel.getPropertyDomainMap().get(r.getNameSpace()+r.getLocalName()).add(propIter.nextStatement().getObject().toString());
+				}
+			}
 			if(r.hasProperty(model.getProperty(TTLReaderHelper.PREDICATE_RANGE_INCLUDES))) {
 				StmtIterator propIter = r.listProperties(model.getProperty(TTLReaderHelper.PREDICATE_RANGE_INCLUDES));
+				while(propIter.hasNext()) {
+					ttlModel.getPropertyTypeMap().get(r.getNameSpace()+r.getLocalName()).add(propIter.nextStatement().getObject().toString());
+				}
+			}
+			if(r.hasProperty(model.getProperty(TTLReaderHelper.DCAT_PREDICATE_RANGE_INCLUDES))) {
+				StmtIterator propIter = r.listProperties(model.getProperty(TTLReaderHelper.DCAT_PREDICATE_RANGE_INCLUDES));
+				while(propIter.hasNext()) {
+					ttlModel.getPropertyTypeMap().get(r.getNameSpace()+r.getLocalName()).add(propIter.nextStatement().getObject().toString());
+				}
+			}
+			if(r.hasProperty(model.getProperty(TTLReaderHelper.RDF_PREDICATE_RANGE_INCLUDES))) {
+				StmtIterator propIter = r.listProperties(model.getProperty(TTLReaderHelper.RDF_PREDICATE_RANGE_INCLUDES));
 				while(propIter.hasNext()) {
 					ttlModel.getPropertyTypeMap().get(r.getNameSpace()+r.getLocalName()).add(propIter.nextStatement().getObject().toString());
 				}

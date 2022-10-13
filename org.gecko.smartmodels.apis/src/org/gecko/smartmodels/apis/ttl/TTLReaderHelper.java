@@ -32,6 +32,8 @@ public class TTLReaderHelper {
 	 * 
 	 **/
 	public static final String PREDICATE_DOMAIN_INCLUDES = "https://schema.org/domainIncludes";
+	public static final String DCAT_PREDICATE_DOMAIN_INCLUDES = "http://purl.org/dc/dcam/domainIncludes";
+	public static final String RDF_PREDICATE_DOMAIN_INCLUDES = "http://www.w3.org/2000/01/rdf-schema#domain";
 	
 	
 	/** PREDICATE_RANGE_INCLUDES 
@@ -39,6 +41,8 @@ public class TTLReaderHelper {
 	 * 
 	 **/
 	public static final String PREDICATE_RANGE_INCLUDES = "https://schema.org/rangeIncludes";
+	public static final String DCAT_PREDICATE_RANGE_INCLUDES = "http://purl.org/dc/dcam/rangeIncludes";
+	public static final String RDF_PREDICATE_RANGE_INCLUDES = "http://www.w3.org/2000/01/rdf-schema#range";
 	
 	
 	/** PREDICATE_TYPE 
@@ -53,6 +57,7 @@ public class TTLReaderHelper {
 	 * 
 	 * */
 	public static final String OBJECT_CLASS_TYPE = "http://www.w3.org/2000/01/rdf-schema#Class";
+	public static final String OWL_OBJECT_CLASS_TYPE = "http://www.w3.org/2002/07/owl#Class";
 	
 	
 	/** OBJECT_DATATYPE_TYPE 
@@ -60,6 +65,7 @@ public class TTLReaderHelper {
 	 * 
 	 * */
 	public static final String OBJECT_DATATYPE_TYPE = "https://schema.org/DataType";
+	public static final String RDF_OBJECT_DATATYPE_TYPE = "http://www.w3.org/2000/01/rdf-schema#Datatype";
 	
 	
 	/** OBJECT_PROPERTY_TYPE 
@@ -67,6 +73,7 @@ public class TTLReaderHelper {
 	 * 
 	 * */
 	public static final String OBJECT_PROPERTY_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property";
+	public static final String OWL_OBJECT_PROPERTY_TYPE = "http://www.w3.org/2002/07/owl#ObjectProperty";
 	
 
 

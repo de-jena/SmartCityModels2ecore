@@ -12,7 +12,6 @@
 	org.apache.commons.commons-codec,\
 	org.gecko.smartmodels.geojson.model;version=latest,\
 	org.apache.commons.io,\
-	org.gecko.smartmodels.schema.model;version=latest,\
 	org.apache.jena.osgi
 
 Bundle-Version: 1.0.0.SNAPSHOT

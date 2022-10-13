@@ -51,6 +51,7 @@ public class EcoreSmartModelGeneratorFromTtl implements EcoreSmartModelGenerator
 	private ResourceSet resourceSet;
 
 	private static final String TTL_FILE_EXTENSION = ".ttl";
+	private static final String RDF_FILE_EXTENSION = ".rdf";
 	
 	private static final Map<String, EClassifier> BASIC_TYPES_CONVERSION_MAP = 
 			Map.ofEntries(Map.entry("Float", EcorePackage.Literals.EDOUBLE_OBJECT),
@@ -61,7 +62,8 @@ public class EcoreSmartModelGeneratorFromTtl implements EcoreSmartModelGenerator
 						  Map.entry("Text", EcorePackage.Literals.ESTRING),
 						  Map.entry("Time", EcorePackage.Literals.ESTRING),
 						  Map.entry("Date", EcorePackage.Literals.ESTRING),
-						  Map.entry("DateTime", EcorePackage.Literals.ESTRING));
+						  Map.entry("DateTime", EcorePackage.Literals.ESTRING),
+						  Map.entry("Literal", EcorePackage.Literals.ESTRING));
 	
 	private static final String DATA_TYPE_CLASS_NAME = "DataType";
 	
@@ -76,6 +78,9 @@ public class EcoreSmartModelGeneratorFromTtl implements EcoreSmartModelGenerator
 			return false;
 		}
 		if(pathToInputFile.endsWith(TTL_FILE_EXTENSION)) {
+			return true;
+		}
+		if(pathToInputFile.endsWith(RDF_FILE_EXTENSION)) {
 			return true;
 		}
 		return false;
@@ -103,7 +108,8 @@ public class EcoreSmartModelGeneratorFromTtl implements EcoreSmartModelGenerator
 		}
 
 		TTLModel ttlModel = (TTLModel) ttlReader.readTTLFile(pathToInputFile);
-		String fileName = new File(pathToInputFile).getName().replace(TTL_FILE_EXTENSION, "");
+		String wholeFileName = new File(pathToInputFile).getName();
+		String fileName = wholeFileName.contains(TTL_FILE_EXTENSION) ? wholeFileName.replace(TTL_FILE_EXTENSION, "") : wholeFileName.replace(RDF_FILE_EXTENSION, "");
 		String ecoreModelName = fileName.substring(0,1).toLowerCase() + fileName.substring(1);
 		final EPackage mainEcorePackage = ECoreGeneratorHelper.createPackage(ecoreModelName, ecoreModelName, ECORE_URL_PREFIX+ecoreModelName+ECORE_URL_VERSION);
 
@@ -221,6 +227,9 @@ public class EcoreSmartModelGeneratorFromTtl implements EcoreSmartModelGenerator
 	}
 
 	private String extractLastURLSegment(String url) {
+		if(url.contains("#")) {
+			return url.substring(url.lastIndexOf('#') + 1);
+		}
 		return url.substring(url.lastIndexOf('/') + 1);
 	}
 

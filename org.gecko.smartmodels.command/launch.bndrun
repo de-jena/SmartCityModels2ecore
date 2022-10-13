@@ -48,8 +48,7 @@
 	org.apache.thrift;version='[0.16.0,0.16.1)',\
 	slf4j.api;version='[1.7.25,1.7.26)',\
 	slf4j.simple;version='[1.7.25,1.7.26)',\
-	org.gecko.smartmodels.ttl;version=snapshot,\
-	org.gecko.smartmodels.schema.model;version=snapshot
+	org.gecko.smartmodels.ttl;version=snapshot
 
 -runrequires: \
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
