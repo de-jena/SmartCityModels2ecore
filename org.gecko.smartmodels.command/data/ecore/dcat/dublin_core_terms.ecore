@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dublin_core_terms" nsURI="http://smartmodels.com/dublin_core_terms/1.0"
+    nsPrefix="dublin_core_terms">
+  <eClassifiers xsi:type="ecore:EClass" name="Jurisdiction" eSuperTypes="#//LocationPeriodOrJurisdiction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LocationPeriodOrJurisdiction" abstract="true"
+      interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LinguisticSystem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PhysicalMedium" eSuperTypes="#//MediaType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MediaType" abstract="true" interface="true"
+      eSuperTypes="#//MediaTypeOrExtent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LicenseDocument" eSuperTypes="#//RightsStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RightsStatement" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Standard"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProvenanceStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BibliographicResource"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Policy"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Frequency"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MediaTypeOrExtent" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FileFormat" eSuperTypes="#//MediaType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Agent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PhysicalResource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="medium" eType="#//PhysicalMedium"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SizeOrDuration" eSuperTypes="#//MediaTypeOrExtent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AgentClass" eSuperTypes="#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MethodOfInstruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PeriodOfTime" eSuperTypes="#//LocationPeriodOrJurisdiction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MethodOfAccrual"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Location" eSuperTypes="#//LocationPeriodOrJurisdiction"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="URI"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ISO3166"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Point"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RFC4646"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RFC1766"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ISO639-2"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="W3CDTF"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ISO639-3"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Period"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Box"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RFC5646"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RFC3066"/>
+</ecore:EPackage>

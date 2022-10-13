@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="foaf" nsURI="http://smartmodels.com/foaf/1.0" nsPrefix="foaf">
+  <eClassifiers xsi:type="ecore:EClass" name="Organization" eSuperTypes="#//Agent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Agent" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="openid" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tipjar" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topic_interest" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="account" eType="#//OnlineAccount"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jabberID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icqChatID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="weblog" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interest" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="msnChatID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="holdsAccount" eType="#//OnlineAccount"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="yahooChatID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mbox" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aimChatID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="made" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="skypeID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mbox_sha1sum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthday" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OnlineChatAccount" eSuperTypes="#//OnlineAccount"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OnlineAccount" abstract="true" interface="true"
+      eSuperTypes="#//Thing">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accountServiceHomepage"
+        eType="#//Document" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LabelProperty"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Project"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Document" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryTopic" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topic" eType="#//Thing"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OnlineEcommerceAccount" eSuperTypes="#//OnlineAccount"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Image" eSuperTypes="#//Document">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thumbnail" eType="#//Image"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depicts" eType="#//Thing"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fundedBy" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="homepage" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="maker" eType="#//Agent"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isPrimaryTopicOf" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logo" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="theme" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depiction" eType="#//Image"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//Agent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//Agent"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SpatialThing" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="based_near" eType="#//SpatialThing"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PersonalProfileDocument" eSuperTypes="#//Document"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OnlineGamingAccount" eSuperTypes="#//OnlineAccount"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//SpatialThing #//Agent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="publications" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pastProject" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="surname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="img" eType="#//Image" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workInfoHomepage" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workplaceHomepage" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schoolHomepage" eType="#//Document"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="myersBriggs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="familyName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="knows" eType="#//Person"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="plan" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="geekcode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="family_name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentProject" eType="#//Thing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
