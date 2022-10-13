@@ -18,7 +18,11 @@
     </genClasses>
     <genClasses image="false" ecoreClass="rdf.ecore#//RDFGraph">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute rdf.ecore#//RDFGraph/nodes"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference rdf.ecore#//RDFGraph/resources"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference rdf.ecore#//RDFGraph/resources">
+        <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="return getNodes().list(ePackage.getRDFGraph_Resources());"/>
+        </genAnnotations>
+      </genFeatures>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference rdf.ecore#//RDFGraph/properties"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference rdf.ecore#//RDFGraph/blankNodes"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference rdf.ecore#//RDFGraph/datatypes"/>
